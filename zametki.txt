@@ -1,0 +1,14 @@
+стрічка з файлу prettier.rc
+ "endOfLine": "lf",
+ "jsxBracketSameLine": false
+
+ {
+  "semi": true,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "bracketSpacing": true,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "arrowParens": "avoid"
+}
