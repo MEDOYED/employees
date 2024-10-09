@@ -35,6 +35,14 @@ class App extends Component {
     };
   }
 
+  addNewUser = newUser => {
+    this.setState(prevState => {
+      return {
+        data: [...prevState.data, newUser],
+      };
+    });
+  };
+
   deleteItem = id => {
     this.setState(({ data }) => {
       return {
@@ -55,7 +63,7 @@ class App extends Component {
 
         <EmployeesList data={this.state.data} onDelete={this.deleteItem} />
 
-        <EmployeesAddForm />
+        <EmployeesAddForm addNewUser={this.addNewUser} />
       </div>
     );
   }
