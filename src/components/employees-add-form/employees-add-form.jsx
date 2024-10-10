@@ -20,15 +20,7 @@ class EmployeesAddForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newUser = {
-      name: this.state.name,
-      salary: this.state.salary,
-      increase: true,
-      id: Math.floor(Math.random() * 100),
-    };
-
-    this.props.addNewUser(newUser);
-
+    this.props.onAdd(this.state.name, this.state.salary);
     this.setState({
       name: "",
       salary: "",
@@ -62,8 +54,8 @@ class EmployeesAddForm extends Component {
           <button
             type="submit"
             className="btn btn-outline-light"
-            onClick={this.onSubmit}
-            onChange={this.addNewUser}
+            // onClick={this.onSubmit}
+            // onChange={this.addItem}
           >
             Добавить
           </button>
