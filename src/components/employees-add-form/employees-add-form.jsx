@@ -25,6 +25,8 @@ class EmployeesAddForm extends Component {
       name: "",
       salary: "",
     });
+
+    this.props.totalNumberOfEmployees();
   };
 
   render() {
