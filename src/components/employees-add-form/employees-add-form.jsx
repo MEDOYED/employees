@@ -28,13 +28,15 @@ class EmployeesAddForm extends Component {
       this.setState({
         name: "",
         salary: "",
+        namePlaceholder: "Как его зовут?",
+        salaryPlaceholder: "З/П в $?",
         isCorrectlyEntered: true,
       });
     } else {
       this.setState({
         name: "",
         salary: "",
-        namePlaceholder: "введите правильно",
+        namePlaceholder: "Введите правильное имя",
         salaryPlaceholder: "З/П доложна бить больше 100$",
         isCorrectlyEntered: false,
       });
