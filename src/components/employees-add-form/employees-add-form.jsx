@@ -8,6 +8,9 @@ class EmployeesAddForm extends Component {
     this.state = {
       name: "",
       salary: "",
+      namePlaceholder: "Как его зовут?",
+      salaryPlaceholder: "З/П в $?",
+      isCorrectlyEntered: true,
     };
   }
 
@@ -20,15 +23,32 @@ class EmployeesAddForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    this.props.onAdd(this.state.name, this.state.salary);
-    this.setState({
-      name: "",
-      salary: "",
-    });
+    if (this.state.name.length >= 3 && this.state.salary >= 100) {
+      this.props.onAdd(this.state.name, this.state.salary);
+      this.setState({
+        name: "",
+        salary: "",
+        isCorrectlyEntered: true,
+      });
+    } else {
+      this.setState({
+        name: "",
+        salary: "",
+        namePlaceholder: "введите правильно",
+        salaryPlaceholder: "З/П доложна бить больше 100$",
+        isCorrectlyEntered: false,
+      });
+    }
   };
 
   render() {
-    const { name, salary } = this.state;
+    const {
+      name,
+      salary,
+      namePlaceholder,
+      salaryPlaceholder,
+      isCorrectlyEntered,
+    } = this.state;
 
     return (
       <div className="app-add-form">
@@ -36,16 +56,21 @@ class EmployeesAddForm extends Component {
         <form className="add-form d-flex" onSubmit={this.onSubmit}>
           <input
             type="text"
-            className="form-control new-post-label"
-            placeholder="Как его зовут?"
+            className={`form-control new-post-label ${
+              isCorrectlyEntered ? "" : "incorrectly-entered"
+            }`}
+            // placeholder="Как его зовут?"
+            placeholder={namePlaceholder}
             name="name"
             value={name}
             onChange={this.onValueChange}
           />
           <input
             type="number"
-            className="form-control new-post-label"
-            placeholder="З/П в $?"
+            className={`form-control new-post-label ${
+              isCorrectlyEntered ? "" : "incorrectly-entered"
+            }`}
+            placeholder={salaryPlaceholder}
             name="salary"
             value={salary}
             onChange={this.onValueChange}
