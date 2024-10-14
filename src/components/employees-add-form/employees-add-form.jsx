@@ -25,8 +25,6 @@ class EmployeesAddForm extends Component {
       name: "",
       salary: "",
     });
-
-    this.props.totalNumberOfEmployees();
   };
 
   render() {
@@ -53,12 +51,7 @@ class EmployeesAddForm extends Component {
             onChange={this.onValueChange}
           />
 
-          <button
-            type="submit"
-            className="btn btn-outline-light"
-            // onClick={this.onSubmit}
-            // onChange={this.addItem}
-          >
+          <button type="submit" className="btn btn-outline-light">
             Добавить
           </button>
         </form>
