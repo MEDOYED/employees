@@ -37,6 +37,7 @@ class App extends Component {
         },
       ],
       term: "",
+      filter: "all",
     };
     this.maxId = 4;
   }
@@ -89,11 +90,49 @@ class App extends Component {
     this.setState({ term: term });
   };
 
+  filterPost = (items, filter) => {
+    // перший варіант
+    switch (filter) {
+      case "rise":
+        return items.filter(item => item.rise);
+      case "moreThan1000":
+        return items.filter(item => item.salary > 1000);
+      default:
+        return items;
+    }
+
+    // другий варінт
+    // if (filter === "rise") {
+    //   return items.filter(items => items.rise);
+    // } else if (filter === "salaryMore1000") {
+    //   return items.filter(items => items.salary >= 1000);
+    // } else {
+    //   return items;
+    // }
+  };
+
+  onFilterSelect = filter => {
+    this.setState({ filter: filter });
+  };
+
   render() {
-    const { data, term } = this.state;
+    const { data, term, filter } = this.state;
+
     const employees = this.state.data.length;
     const increased = this.state.data.filter(item => item.increase).length;
+
+    // перший варіант
     const visibleData = this.searchEmp(data, term);
+    const filteredData = this.filterPost(data, filter);
+    const intersectionData = visibleData.filter(elem =>
+      filteredData.includes(elem),
+    );
+
+    // другий варіант
+    // const intersectionData = this.filterPost(
+    //   this.searchEmp(data, term),
+    //   filter,
+    // );
 
     return (
       <div className="app">
@@ -101,11 +140,11 @@ class App extends Component {
 
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+          <AppFilter onFilterSelect={this.onFilterSelect} filter={filter} />
         </div>
 
         <EmployeesList
-          data={visibleData}
+          data={intersectionData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
         />
